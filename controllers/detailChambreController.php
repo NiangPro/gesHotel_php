@@ -1,8 +1,8 @@
-<?php 
+<?php
 
 if (isset($_GET["id"])) {
     $c = avoirUneChambre($_GET["id"]);
-}else{
+} else {
     header("Location:?page=home");
     exit();
 }

@@ -1,11 +1,11 @@
-<?php 
+<?php
 
 // connexion a la base de donnees 
 
 try {
     $db = new PDO("mysql:host=localhost;dbname=kawsara", "root", "");
 } catch (PDOException $th) {
-   setMessage($th->getMessage(), "danger");
+    setMessage($th->getMessage(), "danger");
 }
 
 function creerUnCompte($prenom, $nom, $adresse, $tel, $cni, $email, $motdepasse, $role)
@@ -26,12 +26,13 @@ function creerUnCompte($prenom, $nom, $adresse, $tel, $cni, $email, $motdepasse,
             "role" => $role
         ]);
     } catch (PDOException $th) {
-       setMessage($th->getMessage(), "danger");
+        setMessage($th->getMessage(), "danger");
     }
 }
 
 
-function seConnecter($email){
+function seConnecter($email)
+{
     global $db;
     try {
         $q = $db->prepare("SELECT * FROM users WHERE email =:email");
@@ -41,11 +42,12 @@ function seConnecter($email){
 
         return $q->fetch(PDO::FETCH_OBJ);
     } catch (PDOException $th) {
-       setMessage($th->getMessage(), "danger");
+        setMessage($th->getMessage(), "danger");
     }
 }
 
-function avoirInfoUtilisateur($id){
+function avoirInfoUtilisateur($id)
+{
     global $db;
 
     try {
@@ -54,14 +56,14 @@ function avoirInfoUtilisateur($id){
 
         return $q->fetch(PDO::FETCH_OBJ);
     } catch (PDOException $th) {
-       setMessage($th->getMessage(), "danger");
+        setMessage($th->getMessage(), "danger");
     }
 }
 
 function mettreAjourLesDonneesUtilisateur($id, $prenom, $nom, $adresse, $tel, $cni, $email, $role)
 {
     global $db;
-    try{
+    try {
         $q = $db->prepare("UPDATE users SET prenom =:prenom, nom =:nom, adresse =:adresse,
                     tel =:tel, cni =:cni, email =:email, role =:role WHERE id =:id");
         return $q->execute([
@@ -74,12 +76,13 @@ function mettreAjourLesDonneesUtilisateur($id, $prenom, $nom, $adresse, $tel, $c
             "role" => $role,
             "id" => $id
         ]);
-    }catch (PDOException $th) {
-       setMessage($th->getMessage(), "danger");
+    } catch (PDOException $th) {
+        setMessage($th->getMessage(), "danger");
     }
 }
 
-function mettreAjourMotDePasse($id, $mdp){
+function mettreAjourMotDePasse($id, $mdp)
+{
     global $db;
     try {
         $q = $db->prepare("UPDATE users SET motdepasse =:mdp WHERE id =:id");
@@ -88,11 +91,12 @@ function mettreAjourMotDePasse($id, $mdp){
             "id" => $id
         ]);
     } catch (PDOException $th) {
-       setMessage($th->getMessage(), "danger");
+        setMessage($th->getMessage(), "danger");
     }
 }
 
-function ajoutChambre($nom, $prix, $description, $image){
+function ajoutChambre($nom, $prix, $description, $image)
+{
     global $db;
     try {
         $q = $db->prepare("INSERT INTO chambres VALUES(null, :nom, :prix, :description, :image)");
@@ -103,11 +107,12 @@ function ajoutChambre($nom, $prix, $description, $image){
             "image" => $image,
         ]);
     } catch (PDOException $th) {
-       setMessage($th->getMessage(), "danger");
+        setMessage($th->getMessage(), "danger");
     }
 }
 
-function recupererTousLesChambres(){
+function recupererTousLesChambres()
+{
     global $db;
     try {
         $q = $db->prepare("SELECT * FROM chambres ORDER BY id DESC");
@@ -115,11 +120,12 @@ function recupererTousLesChambres(){
 
         return $q->fetchAll(PDO::FETCH_OBJ);
     } catch (PDOException $th) {
-       setMessage($th->getMessage(), "danger");
+        setMessage($th->getMessage(), "danger");
     }
 }
 
-function avoirUneChambre($id){
+function avoirUneChambre($id)
+{
     global $db;
     try {
         $q = $db->prepare("SELECT * FROM chambres WHERE id =:id");
@@ -127,11 +133,12 @@ function avoirUneChambre($id){
 
         return $q->fetch(PDO::FETCH_OBJ);
     } catch (PDOException $th) {
-       setMessage($th->getMessage(), "danger");
+        setMessage($th->getMessage(), "danger");
     }
 }
 
-function mettreAjourLaChambre($id, $nom, $prix, $description, $image){
+function mettreAjourLaChambre($id, $nom, $prix, $description, $image)
+{
     global $db;
     try {
         $q = $db->prepare("UPDATE chambres SET nom = :nom, prix =:prix, description =:description,image =:image WHERE id =:id");
@@ -143,16 +150,50 @@ function mettreAjourLaChambre($id, $nom, $prix, $description, $image){
             "image" => $image
         ]);
     } catch (PDOException $th) {
-       setMessage($th->getMessage(), "danger");
+        setMessage($th->getMessage(), "danger");
     }
 }
 
-function supprimerUneChambre($id){
+function supprimerUneChambre($id)
+{
     global $db;
     try {
         $q = $db->prepare("DELETE FROM chambres WHERE id =:id");
         return $q->execute(["id" => $id]);
     } catch (PDOException $th) {
-       setMessage($th->getMessage(), "danger");
+        setMessage($th->getMessage(), "danger");
+    }
+}
+
+function ajoutReservation($reference, $date_debut, $date_fin, $prix_total, $client_id, $chambre_id)
+{
+    global $db;
+    try {
+        $q = $db->prepare("INSERT INTO reservations VALUES(null, :reference, :date_debut, :date_fin, :prix_total, :client_id, :chambre_id, :statut)");
+        return $q->execute([
+            "reference" => $reference,
+            "date_debut" => $date_debut,
+            "date_fin" => $date_fin,
+            "prix_total" => $prix_total,
+            "client_id" => $client_id,
+            "chambre_id" => $chambre_id,
+            "statut" => 0
+        ]);
+    } catch (PDOException $th) {
+        setMessage($th->getMessage(), "danger");
+    }
+}
+
+function mesReservations($client_id){
+    global $db;
+    try {
+        $q = $db->prepare("SELECT r.id as id, r.statut as statut, prix_total, c.nom as nomchambre, date_debut, date_fin, reference
+                            FROM reservations r, chambres c
+                            WHERE r.chambre_id = c.id AND r.client_id = :client_id");
+        $q->execute(["client_id" => $client_id]);
+
+        return $q->fetchAll(PDO::FETCH_OBJ);
+    } catch (PDOException $th) {
+        setMessage($th->getMessage(), "danger");
     }
 }

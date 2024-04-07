@@ -12,10 +12,10 @@
             <a class="btn btn-primary mt-3" data-toggle="collapse" href="#password" role="button" aria-expanded="true" aria-controls="password">
                 Mot de passe
             </a>
-            <a class="btn btn-outline-danger mt-3" href="?page=logout" >
+            <a class="btn btn-outline-danger mt-3" href="?logout">
                 Deconnexion
             </a>
-            
+
         </p>
         <div class="col-md-9">
             <div class="collapse show" id="info" data-parent="#profilAccordion">
@@ -60,19 +60,31 @@
                             <tr>
                                 <th>Reference</th>
                                 <th>Chambre</th>
-                                <th>Nombre de jours</th>
+                                <th>Date d'entrée</th>
+                                <th>Date de sortie</th>
                                 <th>Montant</th>
                                 <th>Statut</th>
                             </tr>
                         </thead>
                         <tbody>
+                            <?php foreach($reservations as $r): ?>
                             <tr>
-                                <td>#ref1</td>
-                                <td>chambre 1</td>
-                                <td>3 jours</td>
-                                <td>50000 FCFA</td>
-                                <td>Passe</td>
+                                <td><?= $r->reference ?></td>
+                                <td><?= $r->nomchambre ?></td>
+                                <td><?= date("d/m/Y", strtotime($r->date_debut))  ?></td>
+                                <td><?= date("d/m/Y", strtotime($r->date_fin)) ?></td>
+                                <td><?= $r->prix_total ?> FCFA</td>
+                                <td>
+                                    <?php if($r->statut == 0): ?>
+                                        <span class="badge badge-primary">En attente</span>
+                                    <?php elseif($r->statut == 1): ?>
+                                        <span class="badge badge-success">Validée</span>
+                                    <?php else: ?>
+                                        <span class="badge badge-danger">rejetée</span>
+                                    <?php endif; ?>
+                                </td>
                             </tr>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
                 </div>
@@ -100,7 +112,7 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
 </section>
 <!--================ Accomodation Area  =================-->

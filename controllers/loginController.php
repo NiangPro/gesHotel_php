@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 $erreurs = "";
 if (isset($_POST["connecter"])) {
@@ -11,12 +11,11 @@ if (isset($_POST["connecter"])) {
         if (estAdmin()) {
             header("Location: ?page=chambreAdmin");
             exit();
-        }else{
+        } else {
             header("Location: ?page=profil");
             exit();
         }
-        
-    }else{
+    } else {
         $erreurs = "Email ou mot de passe incorrect";
     }
 }

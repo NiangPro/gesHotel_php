@@ -19,37 +19,37 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach($chambres as $c): ?>
-                <tr>
-                    <td><img src="images/<?= $c->image ?>" width="100" height="50" alt=""></td>
-                    <td><?= $c->nom ?></td>
-                    <td><?= $c->prix ?> FCFA</td>
-                    <td><?=  nl2br($c->description) ?></td>
-                    <td>
-                        <a href="?page=chambreAdmin&type=edit&id=<?= $c->id ?>" class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a>
-                        <a href="" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal<?= $c->id ?>"><i class="fa fa-trash"></i></a>
-                    </td>
+                <?php foreach ($chambres as $c) : ?>
+                    <tr>
+                        <td><img src="images/<?= $c->image ?>" width="100" height="50" alt=""></td>
+                        <td><?= $c->nom ?></td>
+                        <td><?= $c->prix ?> FCFA</td>
+                        <td><?= nl2br($c->description) ?></td>
+                        <td>
+                            <a href="?page=chambreAdmin&type=edit&id=<?= $c->id ?>" class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a>
+                            <a href="" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal<?= $c->id ?>"><i class="fa fa-trash"></i></a>
+                        </td>
 
-                    <div class="modal fade" id="exampleModal<?= $c->id ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Suppression</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                Êtes-vous sûr de vouloir supprimer ?
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
-                                <a href="?page=chambreAdmin&idDeleting=<?= $c->id ?>" class="btn btn-danger">Oui</a>
-                            </div>
+                        <div class="modal fade" id="exampleModal<?= $c->id ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Suppression</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Êtes-vous sûr de vouloir supprimer ?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
+                                        <a href="?page=chambreAdmin&idDeleting=<?= $c->id ?>" class="btn btn-danger">Oui</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </tr>
+                    </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
