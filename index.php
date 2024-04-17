@@ -18,6 +18,9 @@ if (isset($_GET["page"])) {
         case 'reservationAdmin':
             require_once("controllers/reservationAdminController.php");
             break;
+        case 'employeAdmin':
+            require_once("controllers/employeAdminController.php");
+            break;
         case 'reservation':
             require_once("controllers/reservationController.php");
             break;

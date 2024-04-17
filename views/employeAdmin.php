@@ -2,43 +2,40 @@
 <section class="accomodation_area section_gap">
     <div class="container">
         <div class="section_title row">
-            <h2 class="title_color col-md-10">Liste des chambres</h2>
+            <h2 class="title_color col-md-10">Liste des employés</h2>
             <div class="col-md-2">
-                <a href="?page=chambreAdmin&type=add" class="btn btn-success"><i class="fa fa-plus"></i>Ajouter</a>
+                <a href="?page=employeAdmin&type=add" class="btn btn-success"><i class="fa fa-plus"></i>Ajouter</a>
             </div>
         </div>
         <?php require_once("includes/getMessage.php"); ?>
         <table id="myTable" class="table table-bordered">
             <thead>
                 <tr>
-                    <th>Image</th>
+                    <th>Prénom</th>
                     <th>Nom</th>
-                    <th>Prix Journalier</th>
-                    <th>Description</th>
-                    <th>Statut</th>
+                    <th>Adresse</th>
+                    <th>Téléphone</th>
+                    <th>Cni</th>
+                    <th>Email</th>
+                    <th>Rôle</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($chambres as $c) : ?>
+               <?php foreach($employes as $e): ?>
                     <tr>
-                        <td><img src="images/<?= $c->image ?>" width="100" height="50" alt=""></td>
-                        <td><?= $c->nom ?></td>
-                        <td><?= $c->prix ?> FCFA</td>
-                        <td><?= nl2br($c->description) ?></td>
-                        <td class="text-center h5">
-                            <?php if($c->statut == 1): ?>
-                                <span class="text-danger">Occupée</span>
-                            <?php  else: ?>
-                                <span class="text-success">Libre</span>
-                            <?php  endif; ?>
-                        </td>
+                        <td><?= ucfirst($e->prenom) ?></td>
+                        <td><?= ucfirst($e->nom) ?></td>
+                        <td><?= ucfirst($e->adresse) ?></td>
+                        <td><?= ucfirst($e->tel) ?></td>
+                        <td><?= $e->cni ?></td>
+                        <td><?= $e->email ?></td>
+                        <td><?= ucfirst($e->role) ?></td>
                         <td>
-                            <a href="?page=chambreAdmin&type=edit&id=<?= $c->id ?>" class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a>
-                            <a href="" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal<?= $c->id ?>"><i class="fa fa-trash"></i></a>
+                            <a href="?page=employeAdmin&type=edit&id=<?= $e->id ?>" class="btn btn-primary  btn-sm"><i class="fa fa-edit"></i></a>
+                            <a href="" class="btn btn-danger btn-sm"  data-toggle="modal" data-target="#exampleModal<?= $e->id ?>"><i class="fa fa-trash"></i></a>
                         </td>
-
-                        <div class="modal fade" id="exampleModal<?= $c->id ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="exampleModal<?= $e->id ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -52,7 +49,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
-                                        <a href="?page=chambreAdmin&idDeleting=<?= $c->id ?>" class="btn btn-danger">Oui</a>
+                                        <a href="?page=employeAdmin&idDeleting=<?= $e->id ?>" class="btn btn-danger">Oui</a>
                                     </div>
                                 </div>
                             </div>

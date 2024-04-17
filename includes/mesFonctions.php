@@ -41,6 +41,12 @@ function supprimerLesDonneesDeLInput(){
 
 
 // permet d'avoir la valeur du champ 
-function avoirInput($nom){
-    return isset($_SESSION["INPUT"][$nom]) ? $_SESSION["INPUT"][$nom] : null;
+function avoirInput($nom, $obj = null){
+    if ($obj) {
+        return $obj->$nom;
+    }elseif(isset($_SESSION["INPUT"][$nom])){
+        return $_SESSION["INPUT"][$nom];
+    }else{
+        return null;
+    }
 }

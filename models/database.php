@@ -46,6 +46,45 @@ function seConnecter($email)
     }
 }
 
+function recupererTousLesClients(){
+    global $db;
+    try {
+        $q = $db->prepare("SELECT * FROM users WHERE role =:role");
+        $q->execute(["role" => "client"]);
+
+        return $q->fetchAll(PDO::FETCH_OBJ);
+    } catch (PDOException $th) {
+        setMessage($th->getMessage(), "danger");
+    }
+}
+
+function supprimerUnUtilisateur($id)
+{
+    global $db;
+    try {
+        $q = $db->prepare("DELETE FROM users WHERE id =:id");
+        return $q->execute(["id" => $id]);
+    } catch (PDOException $th) {
+        setMessage($th->getMessage(), "danger");
+    }
+}
+
+function recupererTousLesEmployes(){
+    global $db;
+    try {
+        $q = $db->prepare("SELECT * FROM users WHERE (role =:role1 OR role =:role2) AND id != :id");
+        $q->execute([
+            "role1" => "admin",
+            "role2" => "employe",
+            "id" => $_SESSION["user"]->id,
+        ]);
+
+        return $q->fetchAll(PDO::FETCH_OBJ);
+    } catch (\Throwable $th) {
+        //throw $th;
+    }
+}
+
 function avoirInfoUtilisateur($id)
 {
     global $db;
@@ -99,12 +138,13 @@ function ajoutChambre($nom, $prix, $description, $image)
 {
     global $db;
     try {
-        $q = $db->prepare("INSERT INTO chambres VALUES(null, :nom, :prix, :description, :image)");
+        $q = $db->prepare("INSERT INTO chambres VALUES(null, :nom, :prix, :description, :image, :statut)");
         return $q->execute([
             "nom" => $nom,
             "prix" => $prix,
             "description" => $description,
             "image" => $image,
+            "statut" => 0,
         ]);
     } catch (PDOException $th) {
         setMessage($th->getMessage(), "danger");
@@ -195,5 +235,76 @@ function mesReservations($client_id){
         return $q->fetchAll(PDO::FETCH_OBJ);
     } catch (PDOException $th) {
         setMessage($th->getMessage(), "danger");
+    }
+}
+
+function recupererTousLesReservations(){
+    global $db;
+    try {
+        $q = $db->prepare("SELECT r.id as id, u.tel as tel , u.prenom as prenomclient, u.nom as nomclient, r.statut as statut, prix_total, c.nom as nomchambre, date_debut, date_fin, reference
+                            FROM reservations r, chambres c, users u
+                            WHERE r.chambre_id = c.id AND r.client_id = u.id");
+        $q->execute();
+
+        return $q->fetchAll(PDO::FETCH_OBJ);
+    } catch (PDOException $th) {
+        setMessage($th->getMessage(), "danger");
+    }
+}
+
+function changerStatutReservation($id, $statut){
+    global $db;
+    try {
+        $q = $db->prepare("UPDATE reservations SET statut =:statut WHERE id =:id");
+        return $q->execute([
+            "statut" => $statut,
+            "id" => $id
+        ]);
+    } catch (PDOException $th) {
+        setMessage($th->getMessage(), "danger");
+    }
+}
+
+function changerStatutChambre($id, $statut){
+    global $db;
+    try{
+        $q = $db->prepare("UPDATE chambres SET statut =:statut WHERE id =:id");
+        return $q->execute([
+            "statut" => $statut,
+            "id" => $id
+        ]);
+    } catch (PDOException $th) {
+        setMessage($th->getMessage(), "danger");
+    }
+}
+
+function recupererUneReservation($id){
+    global $db;
+    try {
+        $q = $db->prepare("SELECT * FROM reservations WHERE id =:id");
+        $q->execute(["id" => $id]);
+
+        return $q->fetch(PDO::FETCH_OBJ);
+    } catch (PDOException $th) {
+        setMessage($th->getMessage(), "danger");
+    }
+}
+
+function modifierUneReservation($id, $date_debut, $date_fin, $prix_total, $client_id, $chambre_id, $statut){
+    global $db;
+    try {
+        $q = $db->prepare("UPDATE reservations SET date_debut =:date_debut, date_fin =:date_fin, prix_total =:prix_total, client_id =:client_id, chambre_id =:chambre_id, statut =:statut
+                        WHERE  id =:id");
+        return $q->execute([
+            "id" => $id,
+            "date_debut" => $date_debut,
+            "date_fin" => $date_fin,
+            "prix_total" => $prix_total,
+            "client_id" => $client_id,
+            "chambre_id" => $chambre_id,
+            "statut" => $statut
+        ]);
+    } catch (\Throwable $th) {
+        //throw $th;
     }
 }

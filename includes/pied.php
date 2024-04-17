@@ -95,6 +95,12 @@
  <script src="assets/js/stellar.js"></script>
  <script src="assets/vendors/lightbox/simpleLightbox.min.js"></script>
  <script src="assets/js/custom.js"></script>
+ <script src="https://cdn.datatables.net/2.0.3/js/dataTables.js"></script>
+ <script>
+    $(document).ready( function () {
+        $('#myTable').DataTable();
+    } );
+ </script>
  </body>
 
  </html>

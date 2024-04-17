@@ -18,6 +18,7 @@
     <!-- main css -->
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.css" />
 </head>
 
 <body>
@@ -38,7 +39,8 @@
                         <?php if (estAdmin()) : ?>
                             <li class="nav-item <?= isset($_GET['page']) && $_GET['page'] == 'chambreAdmin' ? 'active' : '' ?>"><a class="nav-link" href="?page=chambreAdmin">Chambres</a></li>
                             <li class="nav-item <?= isset($_GET['page']) && $_GET['page'] == 'reservationAdmin' ? 'active' : '' ?>"><a class="nav-link" href="?page=reservationAdmin">Reservations</a></li>
-                            <li class="nav-item"><a class="nav-link" href="?page=logout">Deconnexion</a></li>
+                            <li class="nav-item <?= isset($_GET['page']) && $_GET['page'] == 'employeAdmin' ? 'active' : '' ?>"><a class="nav-link" href="?page=employeAdmin">Employés</a></li>
+                            <li class="nav-item"><a class="nav-link" href="?logout">Deconnexion</a></li>
 
                         <?php else : ?>
                             <li class="nav-item <?= !isset($_GET['page']) || (isset($_GET['page']) && $_GET['page'] == 'home') ? 'active' : '' ?>"><a class="nav-link" href="?page=home">Accueil</a></li>
