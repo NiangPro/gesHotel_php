@@ -21,6 +21,9 @@ if (isset($_GET["page"])) {
         case 'employeAdmin':
             require_once("controllers/employeAdminController.php");
             break;
+        case 'profilEmploye':
+            require_once("controllers/profilEmployeController.php");
+            break;
         case 'reservation':
             require_once("controllers/reservationController.php");
             break;

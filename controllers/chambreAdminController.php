@@ -1,6 +1,6 @@
 <?php
 
-if (!estAdmin()) {
+if (estClient()) {
     header("location:?page=home");
     exit();
 }

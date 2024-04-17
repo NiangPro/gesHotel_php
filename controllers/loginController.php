@@ -8,15 +8,28 @@ if (isset($_POST["connecter"])) {
 
     if (password_verify($motdepasse, $user->motdepasse)) {
         $_SESSION["user"] = $user;
-        if (estAdmin()) {
+        if (estAdmin() || estEmploye()) {
             header("Location: ?page=chambreAdmin");
             exit();
         } else {
             header("Location: ?page=profil");
             exit();
         }
+        supprimerLesDonneesDeLInput();
     } else {
         $erreurs = "Email ou mot de passe incorrect";
+        enregistrerLesDonnesDeLInput();
     }
 }
-require_once("views/login.php");
+
+if (isset($_SESSION["user"])) {
+    if (estClient()) {
+        header("Location:?page=profil");
+        exit();
+    }else{
+        header("Location:?page=chambreAdmin");
+        exit();
+    }
+}else{
+    require_once("views/login.php");
+}

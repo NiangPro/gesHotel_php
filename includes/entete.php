@@ -36,11 +36,19 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                     <ul class="nav navbar-nav menu_nav ml-auto">
-                        <?php if (estAdmin()) : ?>
+                        <?php if (estAdmin() || estEmploye()) : ?>
                             <li class="nav-item <?= isset($_GET['page']) && $_GET['page'] == 'chambreAdmin' ? 'active' : '' ?>"><a class="nav-link" href="?page=chambreAdmin">Chambres</a></li>
                             <li class="nav-item <?= isset($_GET['page']) && $_GET['page'] == 'reservationAdmin' ? 'active' : '' ?>"><a class="nav-link" href="?page=reservationAdmin">Reservations</a></li>
+                            <?php if(estAdmin()): ?>
                             <li class="nav-item <?= isset($_GET['page']) && $_GET['page'] == 'employeAdmin' ? 'active' : '' ?>"><a class="nav-link" href="?page=employeAdmin">Employés</a></li>
-                            <li class="nav-item"><a class="nav-link" href="?logout">Deconnexion</a></li>
+                            <?php endif; ?>
+                            <li class="nav-item submenu dropdown">
+                                <a href="#" class="nav-link dropdown-toggle text-warning" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?= ucfirst($_SESSION["user"]->prenom) ?></a>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-item"><a class="nav-link" href="?page=profilEmploye">Mon profil</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="?logout">Déconnexion</a></li>
+                                </ul>
+                            </li>
 
                         <?php else : ?>
                             <li class="nav-item <?= !isset($_GET['page']) || (isset($_GET['page']) && $_GET['page'] == 'home') ? 'active' : '' ?>"><a class="nav-link" href="?page=home">Accueil</a></li>

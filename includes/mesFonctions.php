@@ -18,6 +18,15 @@ function estAdmin()
     return false;
 }
 
+function estEmploye()
+{
+    if (isset($_SESSION["user"]) && strtolower($_SESSION["user"]->role) === "employe") {
+        return true;
+    }
+
+    return false;
+}
+
 function estClient()
 {
     if (isset($_SESSION["user"]) && strtolower($_SESSION["user"]->role) === "client") {

@@ -13,7 +13,7 @@
         <form action="" method="POST" class="col-md-12 d-flex flex-column align-items-center">
             <div class="form-group col-md-4">
                 <label for="">Email</label>
-                <input type="email" name="email" required class="form-control">
+                <input type="email" value="<?= avoirInput("email") ?>" name="email" required class="form-control">
             </div>
             <div class="form-group col-md-4">
                 <label for="">Mot de passe</label>
