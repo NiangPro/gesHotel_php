@@ -19,6 +19,8 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 </head>
 
 <body>
@@ -37,6 +39,7 @@
                 <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                     <ul class="nav navbar-nav menu_nav ml-auto">
                         <?php if (estAdmin() || estEmploye()) : ?>
+                            <li class="nav-item <?= isset($_GET['page']) && $_GET['page'] == 'homAdmin' ? 'active' : '' ?>"><a class="nav-link" href="?page=homeAdmin">Tableau de bord</a></li>
                             <li class="nav-item <?= isset($_GET['page']) && $_GET['page'] == 'chambreAdmin' ? 'active' : '' ?>"><a class="nav-link" href="?page=chambreAdmin">Chambres</a></li>
                             <li class="nav-item <?= isset($_GET['page']) && $_GET['page'] == 'reservationAdmin' ? 'active' : '' ?>"><a class="nav-link" href="?page=reservationAdmin">Reservations</a></li>
                             <?php if(estAdmin()): ?>

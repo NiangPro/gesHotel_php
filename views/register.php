@@ -1,11 +1,12 @@
-<!--================ Accomodation Area  =================-->
-<section class="accomodation_area section_gap">
+<section class="breadcrumb_area">
+    <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
     <div class="container">
-        <div class="section_title text-center">
-            <h2 class="title_color">Création compte</h2>
-            <p>We all live in an age that belongs to the young at heart. Life that is becoming extremely fast, </p>
+        <div class="page-cover text-center">
+            <h2 class="page-cover-tittle">Création Compte</h2>
         </div>
-        <form action="" method="POST" class="col-md-12 d-flex flex-column align-items-center">
+    </div>
+    <div class="container">
+        <form action="" method="POST" class="text-white mt-5 col-md-12 d-flex flex-column align-items-center">
             <div class="row">
                 <div class="form-group col-md-6">
                     <label for="">Prenom <span class="text-danger">*</span></label>
@@ -39,9 +40,8 @@
 
             <div class="btn-group">
                 <button type="submit" name="register" class="btn btn-success">Créer</button>
-                <a href="?page=login" class="btn text-warning">Se connecter</a>
+                <a href="?page=login" class="btn btn-warning">Se connecter</a>
             </div>
         </form>
     </div>
 </section>
-<!--================ Accomodation Area  =================-->

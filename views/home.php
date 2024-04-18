@@ -4,16 +4,16 @@
         <div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
         <div class="container">
             <div class="banner_content text-center">
-                <h6>Away from monotonous life</h6>
-                <h2>Relax Your Mind</h2>
-                <p>If you are looking at blank cassettes on the web, you may be very confused at the<br> difference in price. You may see some for as low as $.17 each.</p>
-                <a href="#" class="btn theme_btn button_hover">Get Started</a>
+                <h6>Votre porte d'entrée vers le luxe et le confort</h6>
+                <h2>Réservez, détendez-vous et voyagez</h2>
+                <p class="h5">
+                    Plongez dans un océan de choix, où chaque établissement promet des services 
+                    de qualité supérieure, des chambres élégamment aménagées et des expériences culinaires exquises. <br>
+                    Notre plateforme conviviale vous permet de naviguer en toute simplicité, de découvrir les offres exclusives 
+                    et de réserver en quelques clics seulement.
+                </p>
+                <a href="?page=reservation" class="btn theme_btn button_hover">Réservez</a>
             </div>
-        </div>
-    </div>
-    <div class="hotel_booking_area position">
-        <div class="container">
-            <?php require_once("views/ajoutReservation.php"); ?>
         </div>
     </div>
 </section>
@@ -109,9 +109,15 @@
         <div class="row">
             <div class="col-md-6 d_flex align-items-center">
                 <div class="about_content ">
-                    <h2 class="title title_color">About Us <br>Our History<br>Mission & Vision</h2>
-                    <p>inappropriate behavior is often laughed off as “boys will be boys,” women face higher conduct standards especially in the workplace. That’s why it’s crucial that, as women, our behavior on the job is beyond reproach. inappropriate behavior is often laughed.</p>
-                    <a href="#" class="button_hover theme_btn_two">Request Custom Price</a>
+                    <h2 class="title title_color">Notre Mission & Vision</h2>
+                    <p>
+                        Chez Kawsara, notre engagement est de faire de chaque voyage une expérience mémorable.
+                        Laissez-nous vous guider versdes destinations envoûtantes, où le luxe 
+                        se mêle à la chaleur de l'accueil. Rejoignez-nous dans cette aventure et laissez-nous 
+                        transformer vos voyages en souvenirs inoubliables. Bienvenue chez Kawsara, où le monde 
+                        vous attend avec élégance.
+                    </p>
+                    <a href="?page=register" class="button_hover theme_btn_two">Créer un compte</a>
                 </div>
             </div>
             <div class="col-md-6">

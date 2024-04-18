@@ -308,3 +308,19 @@ function modifierUneReservation($id, $date_debut, $date_fin, $prix_total, $clien
         //throw $th;
     }
 }
+
+
+function montantVenteParMois($annee){
+    global $db;
+    try {
+        $q = $db->prepare("SELECT MONTH(date_debut) as mois, SUM(prix_total) as montant
+                        FROM reservations
+                        WHERE YEAR(date_debut) = :annee
+                        GROUP BY MONTH(date_debut)");
+        $q->execute(["annee" => $annee]);
+
+        return $q->fetchAll(PDO::FETCH_OBJ);
+    } catch (PDOException $th) {
+        setMessage($th->getMessage(), "danger");
+    }
+}
