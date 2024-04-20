@@ -36,6 +36,7 @@
                 </div>
             <?php endforeach; ?>
         </div>
+        <?php piedPagination($totalPages, $pageActuelle);  ?>
     </div>
 </section>
 <!--================ Accomodation Area  =================-->

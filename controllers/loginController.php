@@ -9,7 +9,7 @@ if (isset($_POST["connecter"])) {
     if (password_verify($motdepasse, $user->motdepasse)) {
         $_SESSION["user"] = $user;
         if (estAdmin() || estEmploye()) {
-            header("Location: ?page=chambreAdmin");
+            header("Location: ?page=dashboard");
             exit();
         } else {
             header("Location: ?page=profil");
@@ -27,7 +27,7 @@ if (isset($_SESSION["user"])) {
         header("Location:?page=profil");
         exit();
     }else{
-        header("Location:?page=chambreAdmin");
+        header("Location:?page=dashboard");
         exit();
     }
 }else{

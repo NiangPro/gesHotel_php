@@ -9,14 +9,14 @@ if (isset($_GET["page"])) {
         case 'chambre':
             require_once("controllers/chambreController.php");
             break;
+        case 'dashboard':
+            require_once("controllers/dashboardController.php");
+            break;
         case 'detailChambre':
             require_once("controllers/detailChambreController.php");
             break;
         case 'chambreAdmin':
             require_once("controllers/chambreAdminController.php");
-            break;
-        case 'homeAdmin':
-            require_once("controllers/dashboardController.php");
             break;
         case 'reservationAdmin':
             require_once("controllers/reservationAdminController.php");

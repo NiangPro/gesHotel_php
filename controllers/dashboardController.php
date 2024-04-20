@@ -2,7 +2,14 @@
 
 $anneeActuelle = date("Y");
 $moisActuel = date("m");
-$mtGlobal = montantVenteParMois($anneeActuelle);
+
+$nbreDeClients = count(recupererTousLesClients());
+$recettesMensuelles = 0;
+$nombreChambre = count(recupererTousLesChambres());
+
+
+$mtParMois = montantVenteParMois($anneeActuelle);
+
 
 $moisDeLAnnee = [
     "1" => "Janvier",
@@ -20,19 +27,23 @@ $moisDeLAnnee = [
 ];
 
 $montantReservationsParMois = [];
+
 foreach ($moisDeLAnnee as $key => $mois) {
     $trouve = false;
-    foreach ($mtGlobal as $vente) {
+    foreach ($mtParMois as $vente) {
         if ($vente->mois == $key) {
             $montantReservationsParMois[$mois] = $vente->montant;
             $trouve = true;
         }
+
+        if ($vente->mois == $moisActuel) {
+            $recettesMensuelles = $vente->montant;
+        }
     }
 
-    if ($trouve == false && $key <= $moisActuel) {
+    if($trouve == false && $key <= $moisActuel){
         $montantReservationsParMois[$mois] = 0;
     }
 }
-
 
 require_once("views/dashboard.php");

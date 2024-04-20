@@ -59,3 +59,31 @@ function avoirInput($nom, $obj = null){
         return null;
     }
 }
+
+function pagination($table, $limite = 10){
+    // page actuelle 
+    $page = isset($_GET["numero"]) ? $_GET["numero"] : 1;
+    $debut = ($page - 1) * $limite;
+
+    // recupérer les enregistrements de la table 
+    $elements = elementsPageActuelle($table, $debut, $limite);
+    
+    // compter le  nombre total d'enregistrements 
+    $totalElements = nombreTotalElements($table);
+    $totalPages = ceil($totalElements / $limite);
+
+    return [$elements, $totalPages, $page];
+}
+
+function piedPagination($totalPages, $pageActuelle){
+    
+    echo '
+            <ul class="container d-flex mt-5 justify-content-center pagination">';
+            for($i = 1; $i <= $totalPages; $i++){
+                $classActive = $pageActuelle == $i ? "btn-warning" : "";
+                echo '<li>
+                        <a href="?page='.$_GET['page'].'&numero='.$i.'" class="btn '.$classActive.'">'.$i.'</a>
+                    </li>';
+            }
+       echo  '</ul>';
+}

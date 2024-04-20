@@ -1,27 +1,61 @@
-<section class="accomodation_area section_gap">
-    <div class="container">
-        <div class="section_title row">
-            <h2 class="title_color col-md-10">Liste des employés</h2>
-            <div class="col-md-2">
-                <a href="?page=employeAdmin&type=add" class="btn btn-success"><i class="fa fa-plus"></i>Ajouter</a>
+<section class="blog_categorie_area">
+            <div class="container mt-5 mb-3">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="categories_post">
+                            <img src="assets/image//blog/cat-post/cat-post-3.jpg" alt="post">
+                            <div class="categories_details">
+                                <div class="categories_text">
+                                    <a href="blog-details.html"><h5><?= $nbreDeClients ?></h5></a>
+                                    <div class="border_line"></div>
+                                    <p>Clients</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="categories_post">
+                            <img src="assets/image//blog/cat-post/cat-post-2.jpg" alt="post">
+                            <div class="categories_details">
+                                <div class="categories_text">
+                                    <a href="blog-details.html"><h5><?= $recettesMensuelles ?> FCFA</h5></a>
+                                    <div class="border_line"></div>
+                                    <p>Recettes Mensuelles</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="categories_post">
+                            <img src="assets/image//blog/cat-post/cat-post-1.jpg" alt="post">
+                            <div class="categories_details">
+                                <div class="categories_text">
+                                    <a href="blog-details.html"><h5><?= $nombreChambre ?></h5></a>
+                                    <div class="border_line"></div>
+                                    <p>Chambres</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-    <div class="container mt-5">
+        
+    <div class="container">
+        <h1 class="text-center">Comptabilité Générale</h1>
         <canvas id="graphiqueReservations"></canvas>
     </div>
 </section>
-    
 <script>
-    // Récupère les données PHP dans JavaScript
-    var montantReservationsParMois = <?php echo json_encode($montantReservationsParMois); ?>;
+    // Récupère les données PHP dans Javascript 
+    var montantReservationsParMois = <?= json_encode($montantReservationsParMois) ?>
 
-    // Convertit les clés et les valeurs en tableaux séparés
+    // convertit les clés et les valeurs en tableaux séparés 
     var mois = Object.keys(montantReservationsParMois);
     var montants = Object.values(montantReservationsParMois);
 
-    // Crée le graphique avec Chart.js
-    var ctx = document.getElementById('graphiqueReservations').getContext('2d');
+    // crée le graphique avec chart.js 
+    var ctx= document.getElementById("graphiqueReservations").getContext("2d");
+
     var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
@@ -29,14 +63,14 @@
             datasets: [{
                 label: 'Montant des réservations par mois',
                 data: montants,
-                backgroundColor: 'rgba(54, 162, 235, 0.2)', // Couleur de fond
-                borderColor: 'rgba(54, 162, 235, 1)', // Couleur de la bordure
+                backgroundColor: 'blue',
+                borderColor: 'cyan',
                 borderWidth: 1
             }]
         },
         options: {
             scales: {
-                y: {
+                y:{
                     beginAtZero: true
                 }
             }
