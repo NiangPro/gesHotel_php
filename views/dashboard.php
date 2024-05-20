@@ -63,7 +63,7 @@
             datasets: [{
                 label: 'Montant des réservations par mois',
                 data: montants,
-                backgroundColor: 'blue',
+                backgroundColor: 'orange',
                 borderColor: 'cyan',
                 borderWidth: 1
             }]

@@ -8,6 +8,74 @@ try {
     setMessage($th->getMessage(), "danger");
 }
 
+function ajouterBlog($titre, $description, $image){
+    global $db;
+    try {
+        $q = $db->prepare("INSERT INTO blogs VALUES(null, :titre, :description, :image)");
+        return $q->execute([
+            "titre" => $titre,
+            "description" => $description,
+            "image" => $image
+        ]);
+    } catch (PDOException $th) {
+        setMessage($th->getMessage(), "danger");
+    }
+}
+
+function listeDesBlogs(){
+    global $db;
+    try {
+        $q = $db->prepare("SELECT * FROM blogs ORDER BY id DESC");
+
+        $q->execute();
+
+        return $q->fetchAll(PDO::FETCH_OBJ);
+    } catch (PDOException $th) {
+        setMessage($th->getMessage(), "danger");
+    }
+}
+
+function recupererUnBlog($id){
+    global $db;
+    try {
+        $q = $db->prepare("SELECT * FROM blogs WHERE id =:id");
+
+        $q->execute(["id" => $id]);
+
+        return $q->fetch(PDO::FETCH_OBJ);
+    } catch (PDOException $th) {
+        setMessage($th->getMessage(), "danger");
+    }
+}
+
+function modifierUnBlog($id, $titre, $description, $image){
+    global $db;
+    try {
+        $q = $db->prepare("UPDATE blogs 
+        SET titre =:titre, description =:description, image =:image
+        WHERE id =:id");
+        return $q->execute([
+            "titre" => $titre,
+            "description" => $description,
+            "image" => $image,
+            "id" => $id
+        ]);
+        
+    } catch (PDOException $th) {
+        setMessage($th->getMessage(), "danger");
+    }
+}
+
+function supprimerUnBlog($id){
+    global $db;
+    try {
+        $q = $db->prepare("DELETE FROM blogs WHERE id =:id");
+        return $q->execute(["id" => $id]);
+    } catch (PDOException $th) {
+        setMessage($th->getMessage(), "danger");
+    }
+}
+
 function creerUnCompte($prenom, $nom, $adresse, $tel, $cni, $email, $motdepasse, $role)
 {
     // utilisation de la variable $db 

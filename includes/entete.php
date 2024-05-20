@@ -41,6 +41,7 @@
                             <li class="nav-item <?= isset($_GET['page']) && $_GET['page'] == 'dashboard' ? 'active' : '' ?>"><a class="nav-link" href="?page=dashboard">Tableau de bord</a></li>
                             <li class="nav-item <?= isset($_GET['page']) && $_GET['page'] == 'chambreAdmin' ? 'active' : '' ?>"><a class="nav-link" href="?page=chambreAdmin">Chambres</a></li>
                             <li class="nav-item <?= isset($_GET['page']) && $_GET['page'] == 'reservationAdmin' ? 'active' : '' ?>"><a class="nav-link" href="?page=reservationAdmin">Reservations</a></li>
+                            <li class="nav-item <?= isset($_GET['page']) && $_GET['page'] == 'blogAdmin' ? 'active' : '' ?>"><a class="nav-link" href="?page=blogAdmin">Blogs</a></li>
                             <?php if(estAdmin()): ?>
                             <li class="nav-item <?= isset($_GET['page']) && $_GET['page'] == 'employeAdmin' ? 'active' : '' ?>"><a class="nav-link" href="?page=employeAdmin">Employés</a></li>
                             <?php endif; ?>
