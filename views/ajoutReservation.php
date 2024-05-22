@@ -11,11 +11,11 @@
                         <div class="book_tabel_item">
                             <div class="form-group">
                                 <label for="">Date d'entrée</label>
-                                <input type='date' name="date_debut" value="<?= avoirInput("date_debut") ?>" required class="form-control" placeholder="Date d'entrée" />
+                                <input type='text' name="date_debut" value="<?= avoirInput("date_debut") ?>" required class="form-control checkin-date" placeholder="Date d'entrée" />
                             </div>
                             <div class="form-group">
                                 <label for="">Date de départ</label>
-                                <input type='date' name="date_fin"  value="<?= avoirInput("date_fin") ?>" required class="form-control" placeholder="Date de depart" />
+                                <input type='text' name="date_fin"  value="<?= avoirInput("date_fin") ?>" required class="form-control checkin-date" placeholder="Date de depart" />
                             </div>
                         </div>
                     </div>

@@ -13,8 +13,8 @@ if (isset($_POST["reserver"])) {
 
     $aujourdhui = new DateTime();
 
-    $dd = new DateTime($date_debut);
-    $df = new DateTime($date_fin);
+    $dd = DateTime::createFromFormat("d/m/Y", $date_debut);
+    $df = DateTime::createFromFormat("d/m/Y", $date_fin);
 
     if ($aujourdhui->diff($dd)->format("%R%a") < 0) {
         setMessage("La date d'entrée ne peut pas être inférieur à la date d'aujourd'hui", "danger");
@@ -29,7 +29,7 @@ if (isset($_POST["reserver"])) {
             $prix_total = intval($dd->diff($df)->format("%R%a")) * $c->prix;
             $reference = "#ref".time();
             
-            if (ajoutReservation($reference, $date_debut, $date_fin, $prix_total, $_SESSION["user"]->id, $chambre_id)) {
+            if (ajoutReservation($reference, $dd->format("Y-m-d"), $df->format("Y-m-d"), $prix_total, $_SESSION["user"]->id, $chambre_id)) {
                 setMessage("Ajout reservation avec succès");
                 supprimerLesDonneesDeLInput();
                 header("Location:?page=reservation");

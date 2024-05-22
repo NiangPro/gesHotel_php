@@ -110,6 +110,40 @@
         location.reload();
     }
  </script>
+
+<?php if(isset($_GET["page"]) && $_GET["page"] == "reservation"): ?>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script>
+        $(function(){
+            // avoir la date d'aujourd'hui 
+            var today = new Date();
+            var highlightedDates = [];
+
+            // ajout des 60 prochains jours 
+            for (let i = 0; i <=60; i++) {
+                var date = new Date(today);
+                date.setDate(date.getDate()+ i);
+                highlightedDates.push(date.toISOString().split('T')[0]);
+                
+            }
+
+            // initialisation de date picker 
+            $(".checkin-date").datepicker({
+                dateFormat: 'dd/mm/yy',
+                minDate: 0,
+                beforeShowDay: function(date){
+                    var dateString = $.datepicker.formatDate('yy-mm-dd', date);
+                    if(highlightedDates.indexOf(dateString) !== -1){
+                        return [true, 'highlight', 'Available'];
+                    }
+                    return [true, '', ''];
+                }
+            });
+        });
+    </script>
+
+<?php endif; ?>
  </body>
 
  </html>

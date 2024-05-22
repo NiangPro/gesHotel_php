@@ -20,6 +20,17 @@
     <link rel="stylesheet" href="assets/css/responsive.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <?php if(isset($_GET["page"]) && $_GET["page"] == "reservation"): ?>
+
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+        <style>
+            .highlight .ui-state-default{
+                background: green!important;
+                color: white!important;
+            }
+        </style>
+    <?php endif; ?>
 </head>
 
 <body>
@@ -57,13 +68,8 @@
                             <li class="nav-item <?= !isset($_GET['page']) || (isset($_GET['page']) && $_GET['page'] == 'home') ? 'active' : '' ?>"><a class="nav-link" href="?page=home">Accueil</a></li>
                             <li class="nav-item <?= isset($_GET['page']) && $_GET['page'] == 'chambre' ? 'active' : '' ?>"><a class="nav-link" href="?page=chambre">Chambres</a></li>
                             <li class="nav-item <?= isset($_GET['page']) && $_GET['page'] == 'reservation' ? 'active' : '' ?>"><a class="nav-link" href="?page=reservation">Reservations</a></li>
-                            <li class="nav-item submenu dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Blog</a>
-                                <ul class="dropdown-menu">
-                                    <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="blog-single.html">Blog Details</a></li>
-                                </ul>
-                            </li>
+                            <li class="nav-item <?= isset($_GET['page']) && $_GET['page'] == 'blog' ? 'active' : '' ?>"><a class="nav-link" href="?page=blog">Blogs</a></li>
+                            
                             <?php if (isset($_SESSION["user"])) : ?>
                                 <li class="nav-item  <?= isset($_GET['page']) && $_GET['page'] == 'profil' ? 'active' : '' ?> submenu dropdown">
                                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> <?= $_SESSION["user"]->prenom ?></a>
