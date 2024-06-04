@@ -24,12 +24,13 @@ if (isset($_POST["reserver"])) {
         setMessage("La date de départ ne peut pas être inférieur à la date d'entrée", "danger");
     }else{
 
+
         $c = avoirUneChambre($chambre_id);
         if ($c) {
             $prix_total = intval($dd->diff($df)->format("%R%a")) * $c->prix;
             $reference = "#ref".time();
             
-            if (ajoutReservation($reference, $dd->format("Y-m-d"), $df->format("Y-m-d"), $prix_total, $_SESSION["user"]->id, $chambre_id)) {
+            if (ajoutReservation($reference, $dd->format("Y-m-d"), $df->format("Y-m-d"), $prix_total, $_SESSION["user"]->id, $c->id)) {
                 setMessage("Ajout reservation avec succès");
                 supprimerLesDonneesDeLInput();
                 header("Location:?page=reservation");
@@ -45,4 +46,8 @@ if (isset($_POST["reserver"])) {
     enregistrerLesDonnesDeLInput();
 }
 $chambres = recupererTousLesChambres();
+
+$data = pagination("chambres", 8);
+
+$chambresSimilaires = $data[0];
 require_once("views/reservation.php");

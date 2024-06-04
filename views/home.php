@@ -28,7 +28,7 @@
         <div class="row mb_30">
             <?php foreach ($chambres as $key => $c) : ?>
                 <!-- les 4 dernieres chambres  -->
-                <?php if ($key < 4) : ?>
+                <?php if ($key < 8) : ?>
                     <div class="col-lg-3 col-sm-6" id="<?= $c->id ?>">
                         <div class="accomodation_item text-center">
                             <div class="hotel_img">
@@ -36,7 +36,7 @@
                                 <?php if ($c->statut == 0) : ?>
                                     <a href="?page=reservation&id=<?= $c->id ?>" class="btn theme_btn button_hover">Reservez</a>
                                 <?php else : ?>
-                                    <button disabled disa class="btn theme_btn btn-danger button_hover">Occupée</button>
+                                    <a href="?page=reservation&id=<?= $c->id ?>" class="btn theme_btn btn-danger button_hover">Occupée <br> jusqu'à <br> <?= date("d/m/Y", strtotime(dateFin($c->id))) ?></a>
                                 <?php endif; ?>
                             </div>
                             <a href="?page=detailChambre&id=<?= $c->id ?>">

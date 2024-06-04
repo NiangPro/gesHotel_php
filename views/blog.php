@@ -16,7 +16,7 @@
         <div class="row">
             <?php foreach($blogs as $b): ?>
             <div class="blog_post col-md-4" style="box-shadow: 1px 1px 3px #ccc, -1px -1px 3px #ccc;">
-                <img src="images/<?= $b->image ?>" alt="">
+                <img src="images/<?= $b->image ?>" width="100%" height="250px" alt="">
                 <div class="blog_details">
                     <a href="#"><h2><?= $b->titre ?></h2></a>
                     <p><?= substr($b->description, 0, 90)  ?>...</p>

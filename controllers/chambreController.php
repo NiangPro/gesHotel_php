@@ -1,7 +1,7 @@
 <?php
 
 // $chambres = recupererTousLesChambres();
-$data = pagination("chambres", 4);
+$data = pagination("chambres", 8);
 
 $chambres = $data[0];
 $totalPages = $data[1];

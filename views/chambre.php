@@ -18,14 +18,14 @@
         </div>
         <div class="row mb_30">
             <?php foreach ($chambres as $c) : ?>
-                <div class="col-lg-3 col-sm-6" id="<?= $c->id ?>">
+                <div class="col-lg-4 col-sm-6" id="<?= $c->id ?>">
                     <div class="accomodation_item text-center">
                         <div class="hotel_img">
-                            <img src="images/<?= $c->image ?>" height="270" alt="">
+                            <img src="images/<?= $c->image ?>" width="100%" height="270" alt="">
                             <?php if ($c->statut == 0) : ?>
                                 <a href="?page=reservation&id=<?= $c->id ?>" class="btn theme_btn button_hover">Reservez</a>
                             <?php else : ?>
-                                <button disabled class="btn theme_btn btn-danger button_hover">Occupée</button>
+                                <a href="?page=reservation&id=<?= $c->id ?>" class="btn theme_btn btn-danger button_hover">Occupée <br> jusqu'à <br> <?= date("d/m/Y", strtotime(dateFin($c->id))) ?></a>
                             <?php endif; ?>
                         </div>
                         <a href="?page=detailChambre&id=<?= $c->id ?>">

@@ -223,10 +223,20 @@ function recupererTousLesChambres()
 {
     global $db;
     try {
-        $q = $db->prepare("SELECT * FROM chambres ORDER BY id DESC");
+        $q = $db->prepare("SELECT * FROM chambres WHERE statut = 0 ORDER BY id DESC");
         $q->execute();
 
         return $q->fetchAll(PDO::FETCH_OBJ);
+    } catch (PDOException $th) {
+        setMessage($th->getMessage(), "danger");
+    }
+}
+
+function supprimerUneReservation($id){
+    global $db;
+    try {
+        $q = $db->prepare("DELETE FROM reservations WHERE id =:id");
+        return $q->execute(["id"=>$id]);
     } catch (PDOException $th) {
         setMessage($th->getMessage(), "danger");
     }
@@ -297,7 +307,7 @@ function mesReservations($client_id){
     try {
         $q = $db->prepare("SELECT r.id as id, r.statut as statut, prix_total, c.nom as nomchambre, date_debut, date_fin, reference
                             FROM reservations r, chambres c
-                            WHERE r.chambre_id = c.id AND r.client_id = :client_id");
+                            WHERE r.chambre_id = c.id AND r.client_id = :client_id ORDER BY r.id DESC");
         $q->execute(["client_id" => $client_id]);
 
         return $q->fetchAll(PDO::FETCH_OBJ);
@@ -415,6 +425,22 @@ function nombreTotalElements($table){
         $q->execute();
 
         return $q->fetchColumn();
+    } catch (PDOException $th) {
+        setMessage($th->getMessage(), "danger");
+    }
+}
+
+function dateChambreReservee($id){
+    global $db;
+    try {
+        $q = $db->prepare("SELECT date_fin
+                        FROM chambres c, reservations r
+                        WHERE c.id = r.chambre_id AND c.id = :id
+                        ORDER BY r.id DESC");
+        $q->execute(["id"=> $id]);
+
+        return $q->fetch(PDO::FETCH_OBJ);
+
     } catch (PDOException $th) {
         setMessage($th->getMessage(), "danger");
     }

@@ -127,7 +127,6 @@
                 highlightedDates.push(date.toISOString().split('T')[0]);
                 
             }
-
             // initialisation de date picker 
             $(".checkin-date").datepicker({
                 dateFormat: 'dd/mm/yy',

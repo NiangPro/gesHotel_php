@@ -87,3 +87,8 @@ function piedPagination($totalPages, $pageActuelle){
             }
        echo  '</ul>';
 }
+
+function dateFin($id){
+    $c = dateChambreReservee($id);
+    return $c ? $c->date_fin : null;
+}

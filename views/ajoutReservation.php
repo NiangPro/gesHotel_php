@@ -22,7 +22,7 @@
                     <div class="col-md-4">
                         <div class="book_tabel_item">
                             <div class="form-group mt-4">
-                                <select class="form-control" name="chambre_id" required>
+                                <select class="form-control" <?= isset($_GET['id'])? "disabled": "" ?> name="chambre_id" required>
                                     <label for="" class="text-white">Chambre</label>
                                     <option value="">Veuillez selectionner un chambre</option>
                                     <?php foreach ($chambres as $c) : ?>

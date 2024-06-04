@@ -68,7 +68,7 @@
                         </thead>
                         <tbody>
                             <?php foreach($reservations as $r): ?>
-                            <tr>
+                            <tr id="reservation<?= $r->id ?>">
                                 <td><?= $r->reference ?></td>
                                 <td><?= $r->nomchambre ?></td>
                                 <td><?= date("d/m/Y", strtotime($r->date_debut))  ?></td>
@@ -77,12 +77,32 @@
                                 <td>
                                     <?php if($r->statut == 0): ?>
                                         <span class="badge badge-primary">En attente</span>
+                                        <button type="button" data-toggle="modal" data-target="#exampleModal<?= $r->id ?>" class="btn btm-sm btn-outline-danger" title="annuler"><i class="fa fa-trash"></i></button>
                                     <?php elseif($r->statut == 1): ?>
                                         <span class="badge badge-success">Validée</span>
                                     <?php else: ?>
                                         <span class="badge badge-danger">rejetée</span>
                                     <?php endif; ?>
                                 </td>
+                                <div class="modal fade" id="exampleModal<?= $r->id ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Suppression</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Êtes-vous sûr de vouloir annuler cette réservation ?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
+                                            <a href="?page=profil&idCanceling=<?= $r->id ?>" class="btn btn-danger">Oui</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             </tr>
                             <?php endforeach; ?>
                         </tbody>

@@ -11,6 +11,14 @@ if (isset($_POST["modifier"])) {
     }
 }
 
+if(isset($_GET["idCanceling"])){
+    if (supprimerUneReservation($_GET["idCanceling"])) {
+        setMessage("Annulation avec succès");
+        header("Location:?page=profil");
+        exit();
+    }
+}
+
 if (isset($_POST["editpassword"])) {
     extract($_POST);
 
