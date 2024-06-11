@@ -1,8 +1,7 @@
 <?php
 
-if (estClient()) {
-    header("location:?page=home");
-    exit();
+if (!estAdmin()) {
+    header("Location:?page=home");
 }
 
 // traitement ajout 

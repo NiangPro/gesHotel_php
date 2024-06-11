@@ -8,6 +8,17 @@ try {
     setMessage($th->getMessage(), "danger");
 }
 
+function recupererReservationsPassees(){
+    global $db;
+    try {
+        $q =$db->prepare("SELECT * FROM reservations WHERE date_fin < CURRENT_DATE AND statut = 1");
+        $q->execute();
+
+        return $q->fetchAll(PDO::FETCH_OBJ);
+    } catch (PDOException $th) {
+        setMessage($th->getMessage(), "danger");
+    }
+}
 function ajouterBlog($titre, $description, $image){
     global $db;
     try {

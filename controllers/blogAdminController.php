@@ -1,5 +1,9 @@
 <?php 
 
+if (!estAdmin()) {
+    header("Location:?page=home");
+}
+
 $title = "Liste des blogs";
 
 if(isset($_POST["ajouter"])){

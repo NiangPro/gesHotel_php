@@ -3,6 +3,15 @@ session_start();
 require_once("includes/mesFonctions.php");
 require_once("models/database.php");
 
+// liberer les chambres 
+$reserv = recupererReservationsPassees();
+foreach ($reserv as $r) {
+    $c = avoirUneChambre($r->chambre_id);
+
+    if ($c->statut != 0) {
+        changerStatutChambre($c->id, 0);
+    }
+}
 
 if (isset($_GET["page"])) {
     require_once("includes/entete.php");

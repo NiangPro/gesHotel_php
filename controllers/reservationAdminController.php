@@ -1,5 +1,9 @@
 <?php 
 
+if (!estAdmin()) {
+    header("Location:?page=home");
+}
+
 $reservations = recupererTousLesReservations();
 
 if (isset($_GET["type"])) {

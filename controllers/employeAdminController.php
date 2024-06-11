@@ -1,4 +1,7 @@
 <?php 
+if (!estAdmin()) {
+    header("Location:?page=home");
+}
 
 if (isset($_POST["ajouter"])) {
     extract($_POST);

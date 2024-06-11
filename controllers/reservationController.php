@@ -25,7 +25,7 @@ if (isset($_POST["reserver"])) {
     }else{
 
 
-        $c = avoirUneChambre($chambre_id);
+        $c = avoirUneChambre(isset($chambre)?$chambre->id : $chambre_id);
         if ($c) {
             $prix_total = intval($dd->diff($df)->format("%R%a")) * $c->prix;
             $reference = "#ref".time();
